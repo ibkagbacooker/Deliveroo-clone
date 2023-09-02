@@ -22,13 +22,15 @@ const [restaurants, setRestaurants] = useState([]);
            {id} 
         )
         .then((data)=>{
-            setRestaurants(date?.restaurants);
+            setRestaurants(data?.restaurants);
+        }).catch(error=>{
+            console.log(error)
         });
 
 
-    }, []);
+    }, [id]);
 
-    console.log(restaurants)
+    // console.log(restaurants)
   return (
     <View>
         <View className="mt-4 flex-row items-center justify-between px-4">
@@ -49,44 +51,26 @@ const [restaurants, setRestaurants] = useState([]);
             className="pt-4"
         >
             {/*Restaurant cards  */}
-            <RestaurantCard
-                id = {123}
-                imgUrl = 'https://links.papareact.com/gn7'
-                title = "This is sushi"
-                rating = {4.5}
-                genre = "Japanese"
-                address = "123 Main St"
-                short_description = "A short Description"
-                dishes = {[]}
-                long = {20}
-                lat = {0}
-            />
 
-            <RestaurantCard
-                id = {123}
-                imgUrl = 'https://links.papareact.com/gn7'
-                title = "This is sushi"
-                rating = {4.5}
-                genre = "Japanese"
-                address = "123 Main St"
-                short_description = "A short Description"
-                dishes = {[]}
-                long = {20}
-                lat = {0}
-            />
+            {restaurants?.map(restaurant =>[
+                <RestaurantCard
+                key = {restaurant._id} 
+                id = {restaurant._id}
+                imgUrl={restaurant.image}
+                address={restaurant.address}
+                title={restaurant.name}
+                dishes={restaurant.dishes}
+                rating={restaurant.rating}
+                short_description={restaurant.short_description}
+                genre = {restaurant.type?.name}
+                long = {restaurant.long}
+                lat ={restaurant.lat}
+                
+                />
 
-            <RestaurantCard
-                id = {123}
-                imgUrl = 'https://links.papareact.com/gn7'
-                title = "This is sushi"
-                rating = {4.5}
-                genre = "Japanese"
-                address = "123 Main St"
-                short_description = "A short Description"
-                dishes = {[]}
-                long = {20}
-                lat = {0}
-            />
+            ])}
+
+            
 
             {/* sanity init --coupon sonny2022 */}
         </ScrollView>
