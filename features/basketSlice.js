@@ -13,7 +13,7 @@ export const basketSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.items  = [...state.items, action.payload]; 
+      state.items  = [...state.items, action.payload] 
     },
     removeFromBasket: (state, action) => {
       const index = state.items.findIndex(
@@ -43,9 +43,10 @@ export const { addToBasket, removeFromBasket} = basketSlice.actions;
 export const selectBasketItems = (state) => state.basket.items;
 
 export const selectBasketItemsWithId = (state, id) =>
-    state.basket.items.filter((items)=> items.id === id);
+    state.basket.items.filter((item)=> item.id === id);
 
     export const selectBasketTotal = (state) =>
     state.basket.items.reduce((total, item) => (total += item.price), 0);
 
 export default basketSlice.reducer
+
